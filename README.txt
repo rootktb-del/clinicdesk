@@ -11,10 +11,8 @@ and even then, aside from the models a lot of them are incomplete or still have 
 Everything started to get jumbled and I later decided to make a copy and went through stuff I made and try to standarize everything.
 but I didn't finish in time
 
-In the new one I made the core classes, models and some views, the rest of it are from the old class, the program doesn't work and some of them don't use the new classes
+In the new one I made the core classes, models and some controllers, the rest of it are from the old class, the program doesn't work and some of them use wrong names
 But I put them because it's better than an empty page
 
 و الصراحة ما قصرت يا أستاذ و يعطيك العافة
 
-
-I can't add it to Github because there is a problem in my visual studio
