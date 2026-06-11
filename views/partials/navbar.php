@@ -3,58 +3,97 @@ $user = Auth::currentUser();
 $role = $user['role'] ?? 'guest';
 ?>
 
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
-    <!-- LEFT SIDE -->
-    <ul class="navbar-nav">
 
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-                <i class="fas fa-bars"></i>
-            </a>
-        </li>
+        <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
 
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="index.php?page=dashboard" class="nav-link">Home</a>
-        </li>
+                <!-- DASHBOARD (ALL ROLES) -->
+                <li class="nav-item">
+                    <a href="index.php?page=dashboard"
+                       class="nav-link <?= $page === 'dashboard' ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
 
-    </ul>
+                <?php if ($role === 'admin'): ?>
 
-    <!-- RIGHT SIDE -->
-    <ul class="navbar-nav ml-auto">
+                    <li class="nav-header">ADMIN</li>
 
-        <!-- USER INFO -->
-        <li class="nav-item dropdown">
+                    <li class="nav-item">
+                        <a href="index.php?page=users"
+                           class="nav-link <?= $page === 'users' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
 
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-user"></i>
-                <?= htmlspecialchars($user['name'] ?? 'User') ?>
-            </a>
+                    <li class="nav-item">
+                        <a href="index.php?page=doctors"
+                           class="nav-link <?= $page === 'doctors' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-user-md"></i>
+                            <p>Doctors</p>
+                        </a>
+                    </li>
 
-            <div class="dropdown-menu dropdown-menu-right">
+                    <li class="nav-item">
+                        <a href="index.php?page=appointments"
+                           class="nav-link <?= $page === 'appointments' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-calendar"></i>
+                            <p>Appointments</p>
+                        </a>
+                    </li>
 
-                <span class="dropdown-item-text">
-                    Role: <b><?= htmlspecialchars($role) ?></b>
-                </span>
+                    <li class="nav-item">
+                        <a href="index.php?page=reports"
+                           class="nav-link <?= $page === 'reports' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>Reports</p>
+                        </a>
+                    </li>
 
-                <div class="dropdown-divider"></div>
+                <?php elseif ($role === 'doctor'): ?>
 
-                <!-- LOGOUT FORM -->
-                <form method="POST" action="index.php?page=logout" class="px-3">
+                    <li class="nav-header">DOCTOR</li>
 
-                    <input type="hidden" name="csrf_token"
-                           value="<?= CSRF::generateToken() ?>">
+                    <li class="nav-item">
+                        <a href="index.php?page=appointments"
+                           class="nav-link <?= $page === 'appointments' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-calendar-check"></i>
+                            <p>My Schedule</p>
+                        </a>
+                    </li>
 
-                    <button class="btn btn-danger btn-sm btn-block">
-                        Logout
-                    </button>
+                    <li class="nav-item">
+                        <a href="index.php?page=prescriptions"
+                           class="nav-link <?= $page === 'prescriptions' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-notes-medical"></i>
+                            <p>Prescriptions</p>
+                        </a>
+                    </li>
 
-                </form>
+                <?php elseif ($role === 'patient'): ?>
 
-            </div>
+                    <li class="nav-header">PATIENT</li>
 
-        </li>
+                    <li class="nav-item">
+                        <a href="index.php?page=appointments"
+                           class="nav-link <?= $page === 'appointments' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-calendar-plus"></i>
+                            <p>Appointments</p>
+                        </a>
+                    </li>
 
-    </ul>
+                    <li class="nav-item">
+                        <a href="index.php?page=prescriptions"
+                           class="nav-link <?= $page === 'prescriptions' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-file-medical"></i>
+                            <p>My Prescriptions</p>
+                        </a>
+                    </li>
 
-</nav>
+                <?php endif; ?>
+        </ul>
+
+    </nav>

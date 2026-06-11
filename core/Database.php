@@ -3,8 +3,8 @@
 require_once __DIR__ . '/config/database.php';
 
 class Database
-{
-    private static $instance = null;
+{ // singleton class
+    private static $instance = null; // singleton instance
     private $connection;
     private $config;
 
@@ -45,8 +45,8 @@ class Database
     }
 
 
-
-    public function query(string $sql, string $types = "", array $params = [])
+// main query method with prepared statement support
+    public function query(string $sql, string $types = "", array $params = []) 
     {
         $stmt = $this->connection->prepare($sql);
 
@@ -90,7 +90,7 @@ class Database
 
 
 
-
+// database creation
 
     private function createDatabase()
     {
@@ -102,7 +102,7 @@ class Database
 
 
 
-
+// tables creation
     private function createTables()
     {
         $sql="CREATE TABLE IF NOT EXISTS users (

@@ -21,7 +21,7 @@ class DoctorController
     }
 
 
-    public function index(): void
+    public function index(): void// show doctor list for admin
     {
         Auth::requireRole("admin");
 
@@ -31,7 +31,7 @@ class DoctorController
     }
 
 
-    public function create(): void
+    public function create(): void // show doctor create form for admin
     {
         Auth::requireRole("admin");
 
@@ -42,7 +42,7 @@ class DoctorController
     }
 
 
-    public function store(): void
+    public function store(): void // store new doctor record
     {
         Auth::requireRole("admin");
 
@@ -83,7 +83,7 @@ class DoctorController
     }
 
 
-    public function edit(): void
+    public function edit(): void // show doctor edit form for admin
     {
         Auth::requireRole("admin");
 
@@ -101,7 +101,7 @@ class DoctorController
     }
 
 
-    public function update(): void
+    public function update(): void// admin update doctor record
     {
         Auth::requireRole("admin");
 

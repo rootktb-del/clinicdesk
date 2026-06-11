@@ -15,7 +15,7 @@ class UserController
     }
 
 
-    public function index(): void
+    public function index(): void // show paginated user list with role filter for admin
     {
         Auth::requireRole("admin");
 
@@ -28,7 +28,7 @@ class UserController
     }
 
 
-    public function create(): void
+    public function create(): void // show user create form for admin
     {
         Auth::requireRole("admin");
 
@@ -36,7 +36,7 @@ class UserController
     }
 
 
-    public function store(): void
+    public function store(): void// store new user record from user create form
     {
         Auth::requireRole("admin");
 
@@ -82,7 +82,7 @@ class UserController
     }
 
 
-    public function edit(): void
+    public function edit(): void // show user edit form for admin
     {
         Auth::requireRole("admin");
 
@@ -98,7 +98,7 @@ class UserController
     }
 
 
-    public function update(): void
+    public function update(): void // admin update user record from the user edit form
     {
         Auth::requireRole("admin");
 
@@ -132,7 +132,7 @@ class UserController
     }
 
 
-    public function toggle(): void
+    public function toggle(): void // admin toggle/untoggle user active status
     {
         Auth::requireRole("admin");
 
@@ -147,7 +147,7 @@ class UserController
 
         $id = (int)($_POST['id'] ?? 0);
 
-        if ($id === Auth::currentUser()['id']) {
+        if ($id === Auth::currentUser()['id']) { // prevent admin from deactivating their own account
             Helpers::flash("error", "You cannot deactivate your own account.");
             Helpers::redirect("index.php?page=users");
         }

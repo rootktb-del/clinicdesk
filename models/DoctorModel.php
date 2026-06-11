@@ -5,6 +5,7 @@ require_once __DIR__ . '/BaseModel.php';
 
 class DoctorModel extends BaseModel
 {
+    // find doctor by his id
     public function findByUserId(int $userId): ?array
     {
         $sql = "
@@ -21,6 +22,7 @@ class DoctorModel extends BaseModel
         return $this->fetchOne($result);
     }
 
+    // get all doctors
     public function getAll(): array
     {
         $sql = "
@@ -38,6 +40,7 @@ class DoctorModel extends BaseModel
         return $this->fetchAll($result);
     }
 
+    // count total number of doctors
     public function countAll(): int
     {
         $sql = "SELECT COUNT(*) AS total FROM doctors";
@@ -49,6 +52,7 @@ class DoctorModel extends BaseModel
         return (int) ($row['total'] ?? 0);
     }
 
+    // get paginated list of doctors
     public function getAllPaginated(int $page): array
     {
         $paginator = new Paginator($this->countAll(), 10, $page);
@@ -76,6 +80,7 @@ class DoctorModel extends BaseModel
         return $this->fetchAll($result);
     }
 
+    // create a new doctor record
     public function create(array $data): int
     {
         $sql = "
@@ -103,6 +108,7 @@ class DoctorModel extends BaseModel
         return $this->db->lastInsertId();
     }
 
+    // update a doctor record
     public function update(int $doctorId, array $data): bool
     {
         $sql = "
@@ -129,6 +135,7 @@ class DoctorModel extends BaseModel
         return $result !== false;
     }
 
+    // get the days a doctor is available at
     public function getAvailableDays(int $doctorId): array
     {
         $sql = "SELECT available_days FROM doctors WHERE id = ? LIMIT 1";

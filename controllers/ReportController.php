@@ -18,7 +18,7 @@ class ReportController
     }
 
 
-    public function index(): void
+    public function index(): void // show report filters and results for admin
     {
         Auth::requireRole("admin");
 
@@ -48,7 +48,7 @@ class ReportController
     }
 
 
-    public function export(): void
+    public function export(): void // export report as CSV for admin
     {
         Auth::requireRole("admin");
 

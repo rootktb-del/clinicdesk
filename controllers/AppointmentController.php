@@ -18,7 +18,7 @@ class AppointmentController
     }
 
 
-    public function index(): void
+    public function index(): void // view appointment using role
     {
         Auth::requireRole("admin", "doctor", "patient");
 
@@ -40,7 +40,7 @@ class AppointmentController
     }
 
 
-    public function book(): void
+    public function book(): void //patient book appointment form view
     {
         Auth::requireRole("patient");
 
@@ -50,7 +50,7 @@ class AppointmentController
     }
 
 
-    public function store(): void
+    public function store(): void //patient book appointment form processing
     {
         Auth::requireRole("patient");
 
@@ -96,7 +96,7 @@ class AppointmentController
     }
 
 
-    public function updateStatus(): void
+    public function updateStatus(): void //update status of appointment
     {
         Auth::requireRole("doctor", "admin");
 
@@ -124,7 +124,7 @@ class AppointmentController
     }
 
 
-    public function cancel(): void
+    public function cancel(): void //patient cancel appointment
     {
         Auth::requireRole("patient");
 

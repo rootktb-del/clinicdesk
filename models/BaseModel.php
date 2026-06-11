@@ -10,7 +10,7 @@ abstract class BaseModel
     {
         $this->db = Database::getInstance();
     }
-
+    // main query execution method with prepared statement
     protected function execute(string $sql, string $types = "", array $params = []) {
         try {
             return $this->db->query(
@@ -24,7 +24,7 @@ abstract class BaseModel
         }
     }
 
-    protected function fetchOne($result): ?array
+    protected function fetchOne($result): ?array //get one row from the result of a prepared statement
 {
     if (!$result instanceof mysqli_result) {
         return null;
@@ -35,7 +35,7 @@ abstract class BaseModel
     return $row ?: null;
 }
 
-protected function fetchAll($result): array
+protected function fetchAll($result): array // get all rows from the result of a prepared statement
 {
     if (!$result instanceof mysqli_result) {
         return [];

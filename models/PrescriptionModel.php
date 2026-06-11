@@ -5,6 +5,7 @@ require_once __DIR__ . '/BaseModel.php';
 
 class PrescriptionModel extends BaseModel
 {
+    // find prescription by appointment id
     public function findByAppointmentId(int $apptId): ?array
     {
         $sql = "
@@ -19,6 +20,7 @@ class PrescriptionModel extends BaseModel
         return $this->fetchOne($result);
     }
 
+    // create a prescription for an appointment
     public function create(array $data): int
     {
         $sql = "
@@ -46,6 +48,7 @@ class PrescriptionModel extends BaseModel
         return $this->db->lastInsertId();
     }
 
+    // update a prescription
     public function update(int $id, array $data): bool
     {
         $sql = "
@@ -72,6 +75,7 @@ class PrescriptionModel extends BaseModel
         return $result !== false;
     }
 
+    //get prescriptions of a patient
     public function getByPatient(int $patientId): array
     {
         $sql = "

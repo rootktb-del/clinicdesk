@@ -24,7 +24,7 @@ class DashboardController
     }
 
 
-    public function index(): void
+    public function index(): void // show dashboard based on role
     {
         if (!$this->auth->check()) {
             Helpers::redirect("index.php?page=login");
@@ -42,7 +42,7 @@ class DashboardController
     }
 
 
-    private function adminDashboard(): void
+    private function adminDashboard(): void// show admin dashboard
     {
         $totalUsers = $this->userModel->countAll();
         $totalDoctors = $this->userModel->countAll("doctor");
@@ -52,7 +52,7 @@ class DashboardController
     }
 
 
-    private function doctorDashboard(): void
+    private function doctorDashboard(): void// show doctor dashboard
     {
         $doctor = $this->doctorModel->findByUserId($this->auth->currentUser()['id']);
 
@@ -70,7 +70,7 @@ class DashboardController
     }
 
 
-    private function patientDashboard(): void
+    private function patientDashboard(): void// show patient dashboard
     {
         $patientId = $this->auth->currentUser()['id'];
 

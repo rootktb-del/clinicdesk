@@ -5,7 +5,7 @@ require_once __DIR__ . '/BaseModel.php';
 
 class AppointmentModel extends BaseModel
 {
-    public function book(array $data): bool
+    public function book(array $data): bool // Book appointment by inserting in db
     {
         $sql = "
             INSERT INTO appointments
@@ -32,7 +32,7 @@ class AppointmentModel extends BaseModel
 
         return true;
     }
-
+    // Check if doctor has another appointment at the same date and time
     public function hasConflict(int $doctorId, string $date, string $time): bool
     {
         $sql = "
@@ -52,7 +52,7 @@ class AppointmentModel extends BaseModel
 
         return $this->fetchOne($result) !== null;
     }
-
+    //get appointment for a patient
     public function getByPatient(int $patientId, int $page, array $filters = []): array
     {
         $limit = 10;
@@ -76,6 +76,7 @@ class AppointmentModel extends BaseModel
         return $this->fetchAll($result);
     }
 
+    // get a doctor's appointments
     public function getByDoctor(int $doctorId, int $page, array $filters = []): array
     {
         $limit = 10;
@@ -97,6 +98,7 @@ class AppointmentModel extends BaseModel
         return $this->fetchAll($result);
     }
 
+    //get all appointments paginated for admin
     public function getAll(int $page, array $filters = []): array
     {
         $limit = 10;
@@ -119,6 +121,7 @@ class AppointmentModel extends BaseModel
         return $this->fetchAll($result);
     }
 
+    // Count total appointments with a filter
     public function countFiltered(string $scope, int $scopeId, array $filters = []): int
     {
         if ($scope === "doctor") {
@@ -139,6 +142,7 @@ class AppointmentModel extends BaseModel
         return (int) ($this->fetchOne($result)['total'] ?? 0);
     }
 
+    // update status of an appointment
     public function updateStatus(int $id, string $status, string $notes = ""): bool
     {
         $sql = "
@@ -157,6 +161,7 @@ class AppointmentModel extends BaseModel
         return $result !== false;
     }
 
+    // find appointment by id
     public function findById(int $id): ?array
     {
         $sql = "

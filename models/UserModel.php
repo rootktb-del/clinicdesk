@@ -5,6 +5,7 @@ require_once __DIR__ . '/BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    // find user by his id
     public function findById(int $id): ?array
     {
         $sql = "SELECT * FROM users WHERE id = ? LIMIT 1";
@@ -19,6 +20,7 @@ class UserModel extends BaseModel
     }
     
 
+    // find user by his email
     public function findByEmail(string $email): ?array
     {
         $sql = "SELECT * FROM users WHERE email = ? LIMIT 1";
@@ -32,6 +34,7 @@ class UserModel extends BaseModel
         return $this->fetchOne($result);
     }
 
+    // create a new user record
     public function create(array $data): int
     {
         $sql = "INSERT INTO users (name, email, password, role, phone, avatar, is_active)
@@ -58,6 +61,7 @@ class UserModel extends BaseModel
         return $this->db->lastInsertId();
     }
 
+    // update user record
     public function update(int $id, array $data): bool
     {
         $sql = "UPDATE users 
@@ -78,6 +82,7 @@ class UserModel extends BaseModel
         return $result !== false;
     }
 
+    // change user's password
     public function updatePassword(int $id, string $newHash): bool
     {
         $sql = "UPDATE users SET password = ? WHERE id = ?";
@@ -94,13 +99,14 @@ class UserModel extends BaseModel
 
 
 
+    // get paginated list of users
     public function getAllPaginated(int $page, string $role = ""): array
     {
         $paginator = new Paginator($this->countAll($role), 10, $page);
         $limit = $paginator->getPerPage();
         $offset = $paginator->offset();
 
-        if (!empty($role)) {
+        if (!empty($role)) { // optional role filter
             $sql = "SELECT * FROM users WHERE role = ? ORDER BY created_at DESC LIMIT ? OFFSET ?";
             $result = $this->execute($sql, "sii", [$role, $limit, $offset]);
         } else {
@@ -119,10 +125,10 @@ class UserModel extends BaseModel
 
 
 
-
+    // count all users
     public function countAll(string $role = ""): int
     {
-        if (!empty($role)) {
+        if (!empty($role)) { // optional role filter
             $sql = "SELECT COUNT(*) as total FROM users WHERE role = ?";
             $result = $this->execute($sql, "s", [$role]);
         } else {
@@ -137,6 +143,7 @@ class UserModel extends BaseModel
         return (int) ($this->fetchOne($result)['total'] ?? 0);
     }
 
+    // activate/deactivate user
     public function toggleActive(int $id): bool
     {
         $sql = "UPDATE users 

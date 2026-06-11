@@ -27,12 +27,14 @@ require_once __DIR__ . "/../partials/header.php";
 
                 <form method="POST" action="index.php?page=auth&action=login">
 
-                    <input type="hidden" name="csrf_token"
+                    <input type="hidden" name="csrf_token" 
                            value="<?= CSRF::generateToken() ?>">
 
                     <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control"
+
+                        <input type="email" name="email" class="form-control" 
                                placeholder="Email" required>
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

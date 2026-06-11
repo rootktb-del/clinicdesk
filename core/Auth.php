@@ -16,7 +16,7 @@ class Auth
         return true;
     }
 
-    public static function logout()
+    public static function logout() // logout user and destroy session
     {
         session_unset();
 
@@ -40,7 +40,7 @@ class Auth
         exit();
     }
 
-    public static function check():bool
+    public static function check():bool // check if user is logged in
     {
         if (isset($_SESSION['user'])) {
             return true;
@@ -48,7 +48,7 @@ class Auth
         return false;
     }
 
-    public static function currentUser():?array
+    public static function currentUser():?array // get current logged in user sessiom data
     {
         if (isset($_SESSION['user'])) {
             return $_SESSION['user'];
@@ -56,7 +56,7 @@ class Auth
         return null;
     }
 
-        public static function role():?string
+        public static function role():?string // get current logged in user role
     {
         if (isset($_SESSION['user']['role'])) {
             return $_SESSION['user']['role'];
@@ -64,9 +64,9 @@ class Auth
         return null;
     }
 
-    public static function requireRole(... $roles){
+    public static function requireRole(... $roles){ // check if user is logged in and has required role
         
-        if (!self::check()) { 
+        if (!self::check()) {
             Helpers::redirect("views/auth/login.php"); //Check if user is logged in, if not redirect to login page
             exit();
         }

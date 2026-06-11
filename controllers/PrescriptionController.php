@@ -18,7 +18,7 @@ class PrescriptionController
     }
 
 
-    public function create(): void
+    public function create(): void // show prescription create form for doctor
     {
         Auth::requireRole("doctor");
 
@@ -34,7 +34,7 @@ class PrescriptionController
     }
 
 
-    public function store(): void
+    public function store(): void // doctor store prescription form processing
     {
         Auth::requireRole("doctor");
 
@@ -99,7 +99,7 @@ class PrescriptionController
     }
 
 
-    public function download(): void
+    public function download(): void // download prescription file for doctor and patient
     {
         Auth::requireRole("admin", "doctor", "patient");
 

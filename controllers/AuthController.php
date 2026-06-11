@@ -15,9 +15,9 @@ class AuthController
     }
 
 
-    public function showLogin()
+    public function showLogin() //show login form view
     {
-        // If already logged in → redirect dashboard
+        // If already logged in then redirect to dashboard
         if ($this->auth->check()) {
             Helpers::redirect('index.php?page=dashboard');
         }
@@ -26,7 +26,7 @@ class AuthController
     }
 
 
-    public function login()
+    public function login() //login form processing
     {
         if (!Helpers::is_post()) {
             Helpers::redirect('index.php?page=login');
@@ -57,7 +57,7 @@ class AuthController
             Helpers::redirect('index.php?page=login');
         }
 
-        // Check active
+        // Check if active
         if ((int)$user['is_active'] !== 1) {
             Helpers::flash('error', 'Account suspended. Contact admin.');
             Helpers::redirect('index.php?page=login');
@@ -69,13 +69,15 @@ class AuthController
             Helpers::redirect('index.php?page=login');
         }
 
-        // Login user session
+        // set Login user session
         $this->auth->login($user);
 
+        // redirect to dashboard
         Helpers::redirect('index.php?page=dashboard');
     }
 
 
+    // logout user
     public function logout()
     {
         if (Helpers::is_post()) {
